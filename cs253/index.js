@@ -43,6 +43,7 @@ app.all('/secret', function (req, res, next) {
   next(); // pass control to the next handler
 });
 
-app.listen(8000);
-console.log('Express started on port 8000');
+let port = process.argv[2] || 8000;
+app.listen(port);
+console.log('Express started on port ' + port);
 
