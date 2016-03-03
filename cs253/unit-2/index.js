@@ -10,7 +10,7 @@ let body =
   <body>
     <h3>Unit 2</h3>
     <h5>Lesson</h5>
-    <a href="unit-2/form">form</a>
+    <a href="unit-2/lesson/form">form</a>
     <br><a href="unit-2/lesson/get">get</a>
     <br><a href="unit-2/lesson/query">query</a>
     <br><a href="unit-2/lesson/post">post</a>
