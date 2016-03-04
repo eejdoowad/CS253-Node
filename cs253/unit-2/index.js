@@ -23,7 +23,7 @@ let body =
     <br>
     <h5>Problems</h5>
     <a href="unit-2/problem/rot13">rot13</a>
-    <br><a href="unit-2/problem/register">register</a>
+    <br><a href="unit-2/problem/signup">signup</a>
   </body>
 </html>`;
 
@@ -47,7 +47,7 @@ lesson.use('/birthday', require('./lesson/birthday'));
 
 let problem = express.Router();
 problem.use('/rot13', require('./problem/rot13'));
-problem.use('/register', require('./problem/register'));
+problem.use(require('./problem/signup'));
 
 router.use('/lesson', lesson);
 router.use('/problem', problem);
