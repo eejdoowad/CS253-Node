@@ -13,11 +13,15 @@ var users = [
 ];
 
 router.get('/1', (req, res) => {
-  res.render('unit-2/template/1', {title: 'Add a Food', users: users});
+  res.render('unit-2/template/1', {title: 'Users', users: users});
 });
 
 router.get('/2', (req, res) => {
-  res.render('unit-2/template/2', {title: 'n = 1?', name: 'boberto'});
+  res.render('unit-2/template/2', {title: 'Add a food', name: 'boberto'});
+});
+
+router.get('/3', (req, res) => {
+  res.render('unit-2/template/3', {title: 'n = 1?', n: (req.query.n || '').toString()});
 });
 
 module.exports = router;

@@ -1,9 +1,14 @@
 extends ../layout
 
+- title = 'bobo'
 block content
   form
-    h2 Add a Food
-    input(type="text", name="food")
-    <button>Add</button>
-    
-    h2 Hello, name
+    h2 n = 1?
+    label
+      | n:&nbsp;
+      input(type="text", name="n")
+    input(type="submit")
+  if n === '1'
+    h2 Yup, n = 1
+  else
+    h2 No, n != 1

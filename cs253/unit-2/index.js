@@ -20,9 +20,9 @@ let body =
     <br><a href="/unit-2/lesson/label">label</a>
     <br><a href="/unit-2/lesson/select">select</a>
     <br><a href="/unit-2/lesson/birthday">birthday</a>
-    <br><a href="/unit-2/lesson/template/1">template</a>
-    <br><a href="/unit-2/lesson/template/2">template</a>
-    <br><a href="/unit-2/lesson/template/3">template</a>
+    <br><a href="/unit-2/lesson/template/1">template1</a>
+    <br><a href="/unit-2/lesson/template/2">template2</a>
+    <br><a href="/unit-2/lesson/template/3">template3</a>
     <br>
     <h5>Problems</h5>
     <a href="/unit-2/problem/rot13">rot13</a>
