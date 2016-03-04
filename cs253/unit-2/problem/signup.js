@@ -86,14 +86,19 @@ router.get('/signup', (req, res) => {
 });
 
 router.post('/signup', (req, res) => {
-  let valid_username = validUserName(req.body.username);
-  let valid_password = validPassword(req.body.password1);
-  let passwords_match = req.body.password1 === req.body.password2;
-  let valid_email = validEmail(req.body.email) || req.body.email === '';
+  let username = escapeHTML(req.body.username);
+  let password1 = escapeHTML(req.body.password1);
+  let password2 = escapeHTML(req.body.password2);
+  let email = escapeHTML(req.body.email);
+  
+  let valid_username = validUserName(username);
+  let valid_password = validPassword(password1);
+  let passwords_match = password1 === password2;
+  let valid_email = validEmail(email) || email === '';
 
   if (valid_username && valid_password &&
   passwords_match && valid_email) {
-    res.redirect('welcome' + '?' + 'name=' + req.body.username);
+    res.redirect('welcome' + '?' + 'name=' + username);
   } else {
     let username_error =
       valid_username
@@ -113,8 +118,8 @@ router.post('/signup', (req, res) => {
       : 'Invalid email';
 
     res.send(body.fs({
-      "%username%": req.body.username,
-      "%email%": req.body.email,
+      "%username%": username,
+      "%email%": email,
       "%username_error%": username_error,
       "%password_error%": password_error,
       "%passwordmatch_error%": passwordmatch_error,
@@ -124,7 +129,7 @@ router.post('/signup', (req, res) => {
 });
 
 router.get('/welcome', (req, res) => {
-  res.send(body_thanks.fs({"%name%": req.query.name}));
+  res.send(body_thanks.fs({"%name%": escapeHTML(req.query.name)}));
 });
 
 module.exports = router;
