@@ -10,7 +10,7 @@ let body =
   </head>
   <body>
     Get Header
-    <form action="/unit-2/get/response">
+    <form action="get/response">
       <input name="q">
       <input type="submit">
     </form>

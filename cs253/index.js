@@ -1,10 +1,29 @@
 'use strict';
 let express = require('express');
-let unit1 = require('./unit-1/index');
-let unit2 = require('./unit-2/index');
 var bodyParser = require('body-parser');
 
-let body =
+let app = express();
+// install bodyParser middleware for parsing POST queries
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+// set template engine to jade
+app.set('view engine', 'jade');
+app.set('views', './views');
+
+// log all http requests to stdout
+app.use(function (req, res, next) {
+  // console.log('Time:', Date.now());
+  console.log(req.method + ' to ' + req.url);
+  next();
+});
+
+// mount routers for each unit
+app.use('/unit-1', require('./unit-1/index'));
+app.use('/unit-2', require('./unit-2/index'));
+
+// handle get requests to root
+app.get('/', (req, res) => {
+  let body =
 `<!doctype html>
 <html>
   <head>
@@ -17,32 +36,10 @@ let body =
     <br><a href="/unit-3">Unit 3</a>
   </body>
 </html>`;
-
-let app = express();
-// install bodyParser middleware for parsing POST queries
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-
-app.use(function (req, res, next) {
-  // console.log('Time:', Date.now());
-  console.log(req.method + ' to ' + req.url);
-  next();
-});
-
-app.use('/unit-1', unit1);
-app.use('/unit-2', unit2);
-
-app.get('/', (req, res) => {
   res.send(body);
 });
 
-// triggered by any http request method to /secret
-app.all('/secret', function (req, res, next) {
-  console.log('Accessing the secret section ...');
-  next(); // pass control to the next handler
-});
-
+// Start listening on specified port
 let port = process.argv[2] || 8000;
 app.listen(port);
 console.log('Express started on port ' + port);

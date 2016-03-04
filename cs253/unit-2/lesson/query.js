@@ -10,7 +10,7 @@ let body =
   </head>
   <body>
     Get query
-    <form action="/unit-2/query/response">
+    <form action="/unit-2/lesson/query/response">
       <input name="q">
       <input type="submit">
     </form>
