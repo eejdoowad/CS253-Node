@@ -23,6 +23,8 @@ let body =
     <br><a href="/unit-2/lesson/template/1">template1</a>
     <br><a href="/unit-2/lesson/template/2">template2</a>
     <br><a href="/unit-2/lesson/template/3">template3</a>
+    <br><a href="/unit-2/lesson/template/4">template4</a>
+    <br><a href="/unit-2/lesson/template/5">template5</a>
     <br>
     <h5>Problems</h5>
     <a href="/unit-2/problem/rot13">rot13</a>

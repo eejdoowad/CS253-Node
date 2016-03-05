@@ -1,0 +1,12 @@
+extends ../layout
+
+block content
+  form
+    h2 FizzBuzz
+    label
+      | n:&nbsp;
+      input(type="text", name="n")
+    button Compute!
+  ol
+    for n in fizzbuzz
+      li= n

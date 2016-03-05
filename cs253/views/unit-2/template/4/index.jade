@@ -1,0 +1,12 @@
+extends ../layout
+
+block content
+  form
+    h2 Squares
+    label
+      | Enter a number:&nbsp;
+      input(type="text", name="n")
+    button Get Squares!
+  ol
+    for n in squares
+      li= n

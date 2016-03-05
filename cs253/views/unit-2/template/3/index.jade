@@ -1,14 +1,12 @@
 extends ../layout
 
-- title = 'bobo'
 block content
   form
-    h2 n = 1?
-    label
-      | n:&nbsp;
-      input(type="text", name="n")
-    input(type="submit")
-  if n === '1'
-    h2 Yup, n = 1
-  else
-    h2 No, n != 1
+    h2 Add a Food
+    input(type="text", name="food")
+    for food in foods
+      input(type="hidden", name="food", value=food)
+    <button>Add</button>
+  ul
+    for food, index in foods
+      li= index+1 + ". " + food
