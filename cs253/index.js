@@ -9,6 +9,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // set template engine to jade
 app.set('view engine', 'jade');
 app.set('views', './views');
+app.use(express.static('public'));
 
 // log all http requests to stdout
 app.use(function (req, res, next) {

@@ -1,6 +1,7 @@
 'use strict';
 let sqlite3 = require('sqlite3').verbose();
-let db = new sqlite3.Database('ascii.db');
+let path = require('path');
+let db = new sqlite3.Database(path.join(__dirname, 'ascii.db'));
 const art = require('./art');
 
 // Check if links table exists.

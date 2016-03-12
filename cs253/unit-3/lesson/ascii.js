@@ -2,27 +2,33 @@
 let sqlite3 = require('sqlite3').verbose();
 let express = require('express');
 let router = express.Router();
-let db = new sqlite3.Database('ascii.db');
+let path = require('path');
+let db = new sqlite3.Database(path.join(__dirname, 'ascii.db'));
 
+
+// router.get('/', (req, res) => {
+//   res.render('unit-3/ascii', {
+//     title: 'ascii',
+//     entries: ['asdf', 'aasdf', 'vdass']
+//   });
+//   query();
+// });
 
 router.get('/', (req, res) => {
-  // Really starting to hate javascript here
-  // so many different checks required =(
-  let n = parseInt(req.query.n || '0');
-  n = Number.isInteger(n)
-    ? n
-    : 0;
-  let squares =
-    Array.apply(null,
-      Array(parseInt(n))).map(function (_, i) {
-        i = i + 1;
-        return i * i;
-      });
-  res.render('unit-2/template/4', {
-    title: 'Squares!',
-    squares: squares
-  });
+  query1(res);
 });
+
+
+function query1 (res) {
+  const query = 'SELECT * FROM ascii ORDER BY time DESC';
+  db.all(query, (err, rows) => {
+    if (err) console.log(err);
+    res.render('unit-3/ascii', {
+      title: 'ascii',
+      entries: rows
+    });
+  });
+};
 
 
 function query () {

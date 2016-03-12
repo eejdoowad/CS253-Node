@@ -2,11 +2,13 @@ extends ../layout
 
 block content
   form
-    h2 Squares
+    h2 ascii
     label
-      | Enter a number:&nbsp;
-      input(type="text", name="n")
-    button Get Squares!
-  ol
-    for n in squares
-      li= n
+      | Name:&nbsp;
+      input(type="text", name="name")
+    button Submit
+  div
+    for e in entries
+      div
+        div= e.name
+        div= e.art
