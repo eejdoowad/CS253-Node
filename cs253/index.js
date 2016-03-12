@@ -20,6 +20,7 @@ app.use(function (req, res, next) {
 // mount routers for each unit
 app.use('/unit-1', require('./unit-1/index'));
 app.use('/unit-2', require('./unit-2/index'));
+app.use('/unit-3', require('./unit-3/index'));
 
 // handle get requests to root
 app.get('/', (req, res) => {
@@ -34,6 +35,8 @@ app.get('/', (req, res) => {
     <a href="/unit-1">Unit 1</a>
     <br><a href="/unit-2">Unit 2</a>
     <br><a href="/unit-3">Unit 3</a>
+    <br><h4>Ideas</h4>
+    Online S-expression visualizer and other tools useful for compilers</br>
   </body>
 </html>`;
   res.send(body);

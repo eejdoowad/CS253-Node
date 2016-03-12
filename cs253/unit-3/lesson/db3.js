@@ -3,12 +3,13 @@ let sqlite3 = require('sqlite3').verbose();
 let db = new sqlite3.Database('links.sql');
 
 db.serialize(function () {
-  // returns # of votes for link with id = 2
+  // returns the ID of the link that was
+  // submitted by user 62443 and has > 1000 votes
   function query () {
-    db.get('SELECT * FROM links WHERE id = 2', (err, row) => {
+    db.get('SELECT * FROM links WHERE submitter_id = 62443 AND votes > 1000', (err, row) => {
       // since you can't return the row, a callback must be used
       if (err) console.log('error: ' + err);
-      console.log('votes: ' + row.votes);
+      console.log('Link ID: ' + row.id);
     });
   };
   query();
