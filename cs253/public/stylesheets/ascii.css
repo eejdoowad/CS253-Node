@@ -1,0 +1,43 @@
+div.art {
+    white-space: pre-wrap;
+    font: normal 100% monospace;
+    display: inline-block;
+    text-align: left
+}
+
+button.delete {
+  position: absolute;
+  right: 0px;
+  z-index: 1;
+  padding: 3px 5px;
+}
+
+textarea {
+     display: inline-block;
+     width: 100%;
+     height: 120px;
+     padding: 8px;
+     border: 1px solid #cccccc;
+     font: normal 100% monospace;
+}
+
+#submitbutton {
+  float: right;
+}
+
+#fl1 {
+  display: inline-block;
+  width: 100%;
+}
+
+#name {
+  float: left;
+}
+
+button {
+  border: none;
+  padding: 5px 45px;  
+  cursor: pointer;
+  color: white;
+  background-color: #333;
+}

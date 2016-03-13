@@ -25,7 +25,7 @@ function setupDB (row) {
       // Create database
       db.run(
         'CREATE TABLE IF NOT EXISTS ascii' +
-        '(name text, art text, time text)',
+        '(id INTEGER PRIMARY KEY, name TEXT, art TEXT, time TEXT)',
         (err) => {
           if (err) console.log(err);
         });
@@ -41,7 +41,7 @@ function setupDB (row) {
 
 function addEntry (entry) {
   db.run(
-    'INSERT INTO ascii VALUES (?, ?, CURRENT_TIMESTAMP)',
+    'INSERT INTO ascii (name, art, time) VALUES (?, ?, CURRENT_TIMESTAMP)',
     entry.name,
     entry.art,
     (err) => {

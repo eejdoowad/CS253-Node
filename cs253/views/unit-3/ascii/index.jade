@@ -1,14 +1,31 @@
 extends ../layout
 
 block content
-  form
-    h2 ascii
-    label
-      | Name:&nbsp;
-      input(type="text", name="name")
-    button Submit
-  div
-    for e in entries
-      div
-        div= e.name
-        div= e.art
+  div.container
+    div.text-center
+      form(method="POST")
+        h1 ascii art
+        div.row
+          div#fl1
+            label#name
+              | Name:&nbsp;
+              input(type="text", name="name", value=name)
+            span(style="color: red; float: left; margin-left: 6px")
+              = nameError
+            button#submitbutton Submit
+          br
+          textarea(name="art")
+            = art
+          div(style="color: red")
+            = artError
+    div
+      for e in entries
+        hr
+        div.row.text-center
+          form(method="POST")
+            button.delete
+              | x
+            input(type="hidden", name="deleteID" value=e.id)
+          h3= e.name
+          h5= 'id: ' + e.id + ', submitted: ' + e.time
+          div.art= e.art
