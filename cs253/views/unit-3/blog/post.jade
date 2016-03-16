@@ -1,0 +1,12 @@
+extends ../layout
+
+block content
+  div.container
+    div.row.text-center
+      h3= entry.title
+      h5= 'submitted: ' + entry.time
+      div.art= entry.content
+      hr
+      h5
+        a(href="/unit-3/problem/blog")
+          | return to blog home
