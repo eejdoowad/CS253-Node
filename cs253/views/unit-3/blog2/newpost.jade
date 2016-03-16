@@ -1,0 +1,20 @@
+extends ../layout
+
+block content
+  div.container
+    div.text-center
+      form(method="POST")
+        h1 new blog post
+        div.row
+          div#fl1
+            label#name
+              | Name:&nbsp;
+              input(type="text", name="postTitle", value=post.title)
+            span(style="color: red; float: left; margin-left: 6px")
+              = post.titleErrorMessage
+            button#submitbutton Submit
+          br
+          textarea(name="content")
+            = post.content
+          div(style="color: red")
+            = post.contentErrorMessage

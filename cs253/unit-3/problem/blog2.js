@@ -2,148 +2,176 @@
 let sqlite3 = require('sqlite3').verbose();
 let express = require('express');
 let router = express.Router();
-let db = new sqlite3.Database('./databases/blog.db');
 
-function validTitle (title) {
-  return /^[a-zA-Z0-9 _-]{1,20}$/.test(title);
+const blogTitle = 'blog2';
+const URLRoot = '/unit-3/problem/blog2';
+const templateRoot = 'unit-3/blog2';
+const pages = {
+  index: '/',
+  newpost: '/newpost',
+  post: '/post'
+};
+const templates = {
+  index: '/index',
+  newpost: '/newpost',
+  post: '/post'
+};
+
+function fullPath (page) {
+  return URLRoot + page;
+}
+function templatePath (template) {
+  return templateRoot + template;
 }
 
-function validContent (content) {
-  return content !== '';
-}
-
-
-class Blog {
-  constructor (title, router) {
+class BlogPost {
+  constructor (title, content) {
     this.title = title;
-    this.router = router;
+    this.content = content;
   }
-  addEntry (entry, callback) {
-    db.run(
-      'INSERT INTO blog (title, content, time) VALUES (?, ?, CURRENT_TIMESTAMP)',
-      entry.title,
-      entry.content,
-      (err) => {
-        if (err) console.log(err);
-        db.get('SELECT last_insert_rowid()', (err, row) => {
-          if (err) console.log(err);
-          // res.redirect('/unit-3/problem/blog/' + row['last_insert_rowid()']);
-          callback();
-        });
-      });
+  get validTitle () {
+    return /^[a-zA-Z0-9 _-]{1,20}$/.test(this.title);
   }
-}
-
-router.post('/', (req, res) => {
-  const deleteID = req.body.deleteID;
-  if (deleteID !== undefined) {
-    deleteEntryThenRender(deleteID, res);
-  } else {
-    res.redirect('/unit-3/problem/blog');
+  get validContent () {
+    return this.content !== '';
   }
-});
-
-router.post('/newpost', (req, res) => {
-  const postTitle = req.body.postTitle;
-  const content = req.body.content;
-  const isValidTitle = validTitle(postTitle);
-  const isValidContent = validContent(content);
-  if (isValidTitle && isValidContent) {
-    addEntryThenRender(req, res, {
-      title: postTitle,
-      content: content
-    });
-  } else {
-    const titleError = isValidTitle
+  get valid () {
+    return this.validTitle && this.validContent;
+  }
+  get titleErrorMessage () {
+    return this.validTitle
       ? ''
       : 'Invalid Title';
-    const contentError = isValidContent
-      ? ''
-      : 'You must enter something!';
-    renderNewPost(res, postTitle, content, titleError, contentError);
   }
-});
+  get contentErrorMessage () {
+    return this.validContent
+      ? ''
+      : 'Invalid Title';
+  }
+}
+class EmptyBlogPost extends BlogPost {
+  constructor () {
+    super('', '');
+  }
+  get titleErrorMessage () {
+    return '';
+  }
+  get contentErrorMessage () {
+    return '';
+  }
+}
 
-router.get('/', (req, res) => {
-  renderContent(res);
-});
-
-router.get('/newpost', (req, res) => {
-  renderNewPost(res);
-});
-
-router.get('/:id', (req, res) => {
-  const id = req.params.id;
-  console.log('id: ' + id);
-  renderBlogPost(res, id);
-});
-
-function addEntryThenRender (req, res, entry) {
-  db.run(
-    'INSERT INTO blog (title, content, time) VALUES (?, ?, CURRENT_TIMESTAMP)',
-    entry.title,
-    entry.content,
-    (err) => {
-      if (err) console.log(err);
-      db.get('SELECT last_insert_rowid()', (err, row) => {
+class Blog {
+  constructor (dbName) {
+    this.db = new sqlite3.Database('./databases/' + dbName + '.db');
+  }
+  addPost (post, callback) {
+    this.db.run(
+      'INSERT INTO blog (title, content, time) VALUES (?, ?, CURRENT_TIMESTAMP)',
+      post.title,
+      post.content,
+      (err) => {
         if (err) console.log(err);
-        res.redirect('/unit-3/problem/blog/' + row['last_insert_rowid()']);
-      });
-    });
-}
-
-function deleteEntryThenRender (deleteID, res) {
-  db.run(
-    'DELETE FROM blog WHERE id = ?',
-    deleteID,
-    (err) => {
+        callback();
+      }
+    );
+  }
+  deletePost (id, callback) {
+    this.db.run(
+      'DELETE FROM blog WHERE id = ?',
+      id,
+      (err) => {
+        if (err) console.log(err);
+        callback();
+      }
+    );
+  }
+  getPost (id, callback) {
+    const query = 'SELECT * FROM blog WHERE id = ?';
+    this.db.get(query, id, (err, row) => {
       if (err) console.log(err);
-      res.redirect('/unit-3/problem/blog');
+      callback(row);
     });
+  }
+  getAllPosts (callback) {
+    const query = 'SELECT * FROM blog ORDER BY time DESC';
+    this.db.all(query, (err, rows) => {
+      if (err) console.log(err);
+      callback(rows);
+    });
+  }
+  getLastPostID (callback) {
+    this.db.get('SELECT last_insert_rowid()', (err, row) => {
+      if (err) console.log(err);
+      callback(row['last_insert_rowid()']);
+    });
+  }
 }
 
-function renderContent (res, postTitle, content, titleError, contentError) {
-  const query = 'SELECT * FROM blog ORDER BY time DESC';
-  db.all(query, (err, rows) => {
-    if (err) console.log(err);
-    res.render('unit-3/blog', {
-      title: 'blog',
-      postTitle: postTitle,
-      entries: rows,
-      titleError: titleError,
-      contentError: contentError
+let blog = new Blog(blogTitle);
+
+
+router.route(pages.index)
+  .get((req, res) => {
+    renderIndex(res);
+  })
+  .post((req, res) => {
+    const deleteID = req.body.deleteID;
+    if (deleteID !== undefined) {
+      blog.deletePost(deleteID, () => {
+        res.redirect(fullPath(pages.index));
+      });
+    } else {
+      res.redirect(fullPath(pages.index));
+    }
+  });
+
+router.route(pages.newpost)
+  .get((req, res) => {
+    renderNewpost(res, new EmptyBlogPost());
+  })
+  .post((req, res) => {
+    const post = new BlogPost(req.body.postTitle, req.body.content);
+    if (post.valid) {
+      blog.addPost(post, () => {
+        blog.getLastPostID((id) => {
+          res.redirect(fullPath(pages.post) + '/' + id);
+        });
+      });
+    } else {
+      renderNewpost(res, post);
+    }
+  });
+
+router.route(pages.post + '/:id')
+  .get((req, res) => {
+    const id = req.params.id;
+    blog.getPost(id, (post) => {
+      renderPost(res, post);
+    });
+  });
+
+function renderIndex (res) {
+  blog.getAllPosts((posts) => {
+    res.render(templatePath(templates.index), {
+      title: blogTitle,
+      posts: posts
     });
   });
 };
 
-
-function renderNewPost (res, postTitle, content, titleError, contentError) {
-  const query = 'SELECT * FROM blog ORDER BY time DESC';
-  db.all(query, (err, rows) => {
-    if (err) console.log(err);
-    res.render('unit-3/blog/newpost', {
-      title: 'blog',
-      postTitle: postTitle,
-      content: content,
-      titleError: titleError,
-      contentError: contentError
-    });
+function renderNewpost (res, post) {
+  res.render(templatePath(templates.newpost), {
+    title: 'new post',
+    post: post
   });
 };
 
-function renderBlogPost (res, id) {
-  const query = 'SELECT * FROM blog WHERE id = ?';
-  db.get(query, id, (err, row) => {
-    if (err) console.log(err);
-    res.render('unit-3/blog/post', {
-      title: row.title,
-      entry: row
-    });
+function renderPost (res, post) {
+  res.render(templatePath(templates.post), {
+    title: post.title,
+    post: post
   });
 };
-
-// db.serialize(function () {
-//   query();
-// });
 
 module.exports = router;

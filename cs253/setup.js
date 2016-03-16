@@ -1,6 +1,7 @@
 const setup_procedures = [
   './setup/setup_ascii_db',
-  './setup/setup_blog_db'
+  './setup/setup_blog_db',
+  './setup/setup_blog2_db'
 ];
 
 setup_procedures.forEach((value, index) => {

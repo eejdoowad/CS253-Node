@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+  div.container
+    div.text-center
+      form(method="POST")
+        h1 blog2
+        div.row
+          a(href="/unit-3/problem/blog2/newpost")
+            | submit new post
+    div
+      for post in posts
+        hr
+        div.row.text-center
+          include postEntry

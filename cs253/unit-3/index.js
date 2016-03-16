@@ -13,6 +13,7 @@ let body =
     <a href="/unit-3/lesson/ascii">ascii</a>
     <h5>Problems</h5>
     <a href="/unit-3/problem/blog">blog</a>
+    <br><a href="/unit-3/problem/blog2">blog2</a>
   </body>
 </html>`;
 
@@ -27,6 +28,7 @@ lesson.use('/ascii', require('./lesson/ascii'));
 
 let problem = express.Router();
 problem.use('/blog', require('./problem/blog'));
+problem.use('/blog2', require('./problem/blog2'));
 
 router.use('/lesson', lesson);
 router.use('/problem', problem);

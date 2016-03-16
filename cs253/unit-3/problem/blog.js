@@ -52,7 +52,6 @@ router.get('/newpost', (req, res) => {
 
 router.get('/:id', (req, res) => {
   const id = req.params.id;
-  console.log('id: ' + id);
   renderBlogPost(res, id);
 });
 
@@ -119,9 +118,5 @@ function renderBlogPost (res, id) {
     });
   });
 };
-
-// db.serialize(function () {
-//   query();
-// });
 
 module.exports = router;

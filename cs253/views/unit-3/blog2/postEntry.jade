@@ -1,0 +1,10 @@
+.postEntry
+  form(method="POST")
+    button.delete
+      | x
+    input(type="hidden", name="deleteID" value=post.id)
+  h3
+    a(href="/unit-3/problem/blog2/post/" + post.id)
+      = post.title
+  h5= 'submitted: ' + post.time
+  div.art= post.content
