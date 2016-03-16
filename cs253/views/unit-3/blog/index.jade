@@ -16,6 +16,8 @@ block content
             button.delete
               | x
             input(type="hidden", name="deleteID" value=e.id)
-          h3= e.title
+          h3
+            a(href="/unit-3/problem/blog/" + e.id)
+              = e.title
           h5= 'submitted: ' + e.time
           div.art= e.content
