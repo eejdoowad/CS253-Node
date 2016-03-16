@@ -1,8 +1,8 @@
 'use strict';
 let sqlite3 = require('sqlite3').verbose();
-let path = require('path');
-let db = new sqlite3.Database(path.join(__dirname, 'ascii.db'));
-const art = require('./art');
+const dbname = 'ascii.db';
+let db = new sqlite3.Database('./databases/' + dbname);
+const art = require('./default_ascii_art');
 
 // Check if links table exists.
 // If it doesn't, create links table and add data
@@ -34,7 +34,7 @@ function setupDB (row) {
       addEntry(art.hi);
       addEntry(art.poo);
     } else {
-      console.log('ascii.sql already exists');
+      console.log(dbname + ' already exists');
     }
   });
 }

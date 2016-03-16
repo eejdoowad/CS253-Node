@@ -2,17 +2,7 @@
 let sqlite3 = require('sqlite3').verbose();
 let express = require('express');
 let router = express.Router();
-let path = require('path');
-let db = new sqlite3.Database(path.join(__dirname, 'ascii.db'));
-
-
-// router.get('/', (req, res) => {
-//   res.render('unit-3/ascii', {
-//     title: 'ascii',
-//     entries: ['asdf', 'aasdf', 'vdass']
-//   });
-//   query();
-// });
+let db = new sqlite3.Database('./databases/ascii.db');
 
 function validName (name) {
   return /^[a-zA-Z0-9 _-]{1,20}$/.test(name);
@@ -86,9 +76,5 @@ function renderContent (res, name, art, nameError, artError) {
     });
   });
 };
-
-// db.serialize(function () {
-//   query();
-// });
 
 module.exports = router;

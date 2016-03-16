@@ -2,8 +2,7 @@
 let sqlite3 = require('sqlite3').verbose();
 let express = require('express');
 let router = express.Router();
-let path = require('path');
-let db = new sqlite3.Database(path.join(__dirname, 'blog.db'));
+let db = new sqlite3.Database('./databases/blog.db');
 
 function validTitle (title) {
   return /^[a-zA-Z0-9 _-]{1,20}$/.test(title);

@@ -1,7 +1,7 @@
 'use strict';
 let sqlite3 = require('sqlite3').verbose();
-let path = require('path');
-let db = new sqlite3.Database(path.join(__dirname, 'blog.db'));
+const dbname = 'blog.db';
+let db = new sqlite3.Database('./databases/' + dbname);
 let default_blog_posts = require('./default_blog_posts');
 
 // Check if links table exists.
@@ -34,7 +34,7 @@ function setupDB (row) {
       addEntry(default_blog_posts.post2);
       addEntry(default_blog_posts.post3);
     } else {
-      console.log('blog.sql already exists');
+      console.log(dbname + ' already exists');
     }
   });
 }
