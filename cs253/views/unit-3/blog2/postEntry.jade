@@ -1,8 +1,7 @@
 .postEntry
-  form(method="POST")
+  form(method="POST" action="/unit-3/problem/blog2/delete/" + post.id)
     button.delete
       | x
-    input(type="hidden", name="deleteID" value=post.id)
   h3
     a(href="/unit-3/problem/blog2/post/" + post.id)
       = post.title

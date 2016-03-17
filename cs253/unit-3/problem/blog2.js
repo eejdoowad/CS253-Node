@@ -9,7 +9,8 @@ const templateRoot = 'unit-3/blog2';
 const pages = {
   index: '/',
   newpost: '/newpost',
-  post: '/post'
+  post: '/post',
+  delete: '/delete'
 };
 const templates = {
   index: '/index',
@@ -114,16 +115,6 @@ let blog = new Blog(blogTitle);
 router.route(pages.index)
   .get((req, res) => {
     renderIndex(res);
-  })
-  .post((req, res) => {
-    const deleteID = req.body.deleteID;
-    if (deleteID !== undefined) {
-      blog.deletePost(deleteID, () => {
-        res.redirect(fullPath(pages.index));
-      });
-    } else {
-      res.redirect(fullPath(pages.index));
-    }
   });
 
 router.route(pages.newpost)
@@ -148,6 +139,14 @@ router.route(pages.post + '/:id')
     const id = req.params.id;
     blog.getPost(id, (post) => {
       renderPost(res, post);
+    });
+  });
+
+router.route(pages.delete + '/:id')
+  .post((req, res) => {
+    const id = req.params.id;
+    blog.deletePost(id, () => {
+      res.redirect(fullPath(pages.index));
     });
   });
 
