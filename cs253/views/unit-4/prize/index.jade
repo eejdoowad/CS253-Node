@@ -1,0 +1,13 @@
+extends ../layout
+
+block content
+  div.container
+    div.text-center
+      p= 'You have visited ' + visits + ((visits === 1) ? ' time' : ' times')
+      if visits < 1000
+        p Visit 1000 times to win a prize
+      else
+        img(src="/images/cake.png")
+      form(method="POST")
+        label
+          input(type="submit", value="reset visit count")
