@@ -12,7 +12,7 @@ function signedCookie (str) {
 }
 function parseSignedCookie (str) {
   const arr = /(.*)\|(.*)/.exec(str);
-  return arr.length === 3
+  return arr && arr.length === 3
     ? getHash(arr[1]) === arr[2]
       ? arr
       : undefined
