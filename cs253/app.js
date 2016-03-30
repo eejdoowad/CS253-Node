@@ -27,6 +27,7 @@ app.use('/unit-1', require('./unit-1/index'));
 app.use('/unit-2', require('./unit-2/index'));
 app.use('/unit-3', require('./unit-3/index'));
 app.use('/unit-4', require('./unit-4/index'));
+app.use('/unit-5', require('./unit-5/index'));
 
 // handle get requests to root
 app.get('/', (req, res) => {
@@ -42,6 +43,7 @@ app.get('/', (req, res) => {
     <br><a href="/unit-2">Unit 2</a>
     <br><a href="/unit-3">Unit 3</a>
     <br><a href="/unit-4">Unit 4</a>
+    <br><a href="/unit-5">Unit 5</a>
     <br><h4>Ideas</h4>
     Online S-expression visualizer and other tools useful for compilers</br>
   </body>
