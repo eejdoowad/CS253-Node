@@ -3,8 +3,8 @@ let express = require('express');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 const secrets = require('./secrets.json');
-
 let app = express();
+
 // install bodyParser middleware for parsing POST queries
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

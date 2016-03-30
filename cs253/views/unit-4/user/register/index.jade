@@ -1,0 +1,44 @@
+extends ../layout
+block content    
+    div.row
+      div.col-12
+        div.col-4
+          br
+        div.col-4
+          if show.loggedIn
+            | You're already logged in! Log out first.
+          else
+            form(method="POST")
+              label
+                | Username
+                input(type="text" name="username" value=username)
+              if !validUsername
+                span.error Invalid Username
+              else
+                if usernameAvailable
+                  br
+                else
+                  span.error Username unavailable
+              label
+                | Password
+                input(type="password" name="password" value=password)
+              if !validPassword
+                span.error Invalid Password
+              else
+                br
+              label
+                | Verify Password
+                input(type="password" name="password2" value=password2)
+              if !passwordsMatch
+                span.error Passwords do not match
+              else
+                br
+              label
+                | Email (optional)
+                input(type="text" name="email" value=email)
+              if !validEmail
+                span.error Invalid Email
+              else
+                br
+                br
+              button.easy-btn.fit-width Register

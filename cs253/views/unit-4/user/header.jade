@@ -1,0 +1,15 @@
+header
+  a.logo(href="/unit-4/problem/system") home
+  nav.float-right
+    ul
+      li
+        a(href="/unit-4/problem/system/users") users
+      if !show.loggedIn
+        li
+          a(href="/unit-4/problem/system/register") register
+        li
+          a(href="/unit-4/problem/system/login") login
+      else
+        li
+          form.nav-form(method="Post" action="/unit-4/problem/system/logout")
+            button logout

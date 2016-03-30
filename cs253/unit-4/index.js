@@ -15,7 +15,7 @@ let body =
     <br><a href="/unit-4/lesson/smart_cheating">smart_cheating</a>
     <br><a href="/unit-4/lesson/no_cheating">no_cheating</a>
     <h5>Problems</h5>
-    <a href="/unit-4/problem/blog">blog</a>
+    <a href="/unit-4/problem/system">system</a>
   </body>
 </html>`;
 
@@ -32,9 +32,7 @@ lesson.use('/smart_cheating', require('./lesson/smart_cheating'));
 lesson.use('/no_cheating', require('./lesson/no_cheating'));
 
 let problem = express.Router();
-// problem.use('/blog', require('./problem/blog'));
-// problem.use('/blog2', require('./problem/blog2'));
-
+problem.use('/system', require('./problem/system'));
 router.use('/lesson', lesson);
 router.use('/problem', problem);
 
