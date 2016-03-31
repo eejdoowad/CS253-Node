@@ -1,5 +1,4 @@
 'use strict';
-
 const crypto = require('crypto');
 
 function getHash (str) {

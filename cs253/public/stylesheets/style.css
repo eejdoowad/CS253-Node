@@ -29,3 +29,7 @@
   text-align: center;
   display: block;
 }
+
+.fit-width {
+  width: 100%;
+}
