@@ -15,7 +15,11 @@ class UserDB {
       user.hash,
       (err, user) => {
         if (err) console.log(err);
-        callback(user);
+        this.getLastUserID((id) => {
+          this.getById(id, (user) => {
+            callback(user);
+          });
+        });
       }
     );
   }
