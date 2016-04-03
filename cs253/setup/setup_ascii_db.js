@@ -25,7 +25,7 @@ function setupDB (row) {
       // Create database
       db.run(
         'CREATE TABLE IF NOT EXISTS ascii' +
-        '(id INTEGER PRIMARY KEY, name TEXT, art TEXT, time TEXT)',
+        '(id INTEGER PRIMARY KEY, name TEXT, art TEXT, url TEXT, time TEXT)',
         (err) => {
           if (err) console.log(err);
         });
