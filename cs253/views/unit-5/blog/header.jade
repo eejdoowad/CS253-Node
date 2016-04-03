@@ -1,0 +1,17 @@
+header
+  a.logo(href="/unit-5/problem/blog") Blog
+  nav.float-right
+    ul
+      li
+        a(href="/unit-5/problem/blog/newpost") New Post
+      li
+        a(href="/unit-5/problem/blog/users") Users
+      if show.loggedIn
+        li
+          form.nav-form(method="Post" action="/unit-5/problem/blog/logout")
+            button= 'Logout of ' + show.username 
+      else
+        li
+          a(href="/unit-5/problem/blog/register") Register
+        li
+          a(href="/unit-5/problem/blog/login") Login

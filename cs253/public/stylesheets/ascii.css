@@ -21,23 +21,7 @@ textarea {
      font: normal 100% monospace;
 }
 
-#submitbutton {
-  float: right;
-}
-
 #fl1 {
   display: inline-block;
   width: 100%;
-}
-
-#name {
-  float: left;
-}
-
-button {
-  border: none;
-  padding: 5px 45px;  
-  cursor: pointer;
-  color: white;
-  background-color: #333;
 }

@@ -1,0 +1,21 @@
+extends ../layout
+block content
+  div.row
+    if show.loggedIn
+      form(method="POST")
+        div.row
+          label.float-left
+            | Name:&nbsp;
+            input(type="text", name="postTitle", value=post.title)
+          span(style="color: red; float: left; margin-left: 6px")
+            = post.titleErrorMessage
+          button.easy-btn.float-right Submit
+          textarea(name="content")= post.content
+          div(style="color: red")= post.contentErrorMessage
+    else
+      h3.text-center
+        | You must 
+        a(href="/unit-5/problem/blog/login") log in 
+        | to add new posts
+       
+        

@@ -1,5 +1,6 @@
 'use strict';
 let router = require('express').Router();
+
 let User = require('./user');
 let userDB = require('./userDB');
 

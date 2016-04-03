@@ -1,0 +1,11 @@
+article.postEntry.text-center
+  h3
+    a(href="/unit-5/problem/blog/post/" + post.id)
+      = post.title
+  h5(style="margin-bottom:0")= 'submitted: ' + post.time
+  h5(style="margin-bottom:0")= 'author: ' + post.username
+  if post.author == show.id
+    form(method="POST" action="/unit-5/problem/blog/delete/" + post.id)
+      button.easy-btn(style="margin:5px")  Delete
+  div.art
+    pre.text-left(style="display:inline-block")= post.content

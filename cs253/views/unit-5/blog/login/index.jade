@@ -1,0 +1,22 @@
+extends ../layout
+block content
+  .row
+    .col-12
+      .col-4
+        br
+      .col-4
+        if show.loggedIn
+          | You're already logged in! Log out first.
+        else
+          form(method="POST")
+            label Username
+              input(type="text" name="username" value=username)
+            br
+            label Password
+              input(type="password" name="password" value=password)
+            br
+            if loginFailed
+              span.error Invalid Username or Password
+            else 
+              br
+            button.easy-btn.fit-width Login

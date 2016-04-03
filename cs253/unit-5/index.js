@@ -14,7 +14,7 @@ let body =
     <br><a href="/unit-5/lesson/geolocation">geolocation</a>
     <br><a href="/unit-5/lesson/ascii">ascii</a>
     <h5>Problems</h5>
-    <a href="/unit-5/problem/system">system</a>
+    <a href="/unit-5/problem/blog">blog</a>
   </body>
 </html>`;
 
@@ -30,7 +30,7 @@ lesson.use('/geolocation', require('./lesson/geolocation'));
 lesson.use('/ascii', require('./lesson/ascii'));
 
 let problem = express.Router();
-// problem.use('/urllib', require('./problem/urllib'));
+problem.use('/blog', require('./problem/blog'));
 
 router.use('/lesson', lesson);
 router.use('/problem', problem);

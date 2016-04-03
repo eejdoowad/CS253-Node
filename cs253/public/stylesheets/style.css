@@ -1,3 +1,11 @@
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
+}
+
 .easy-btn {
   border: none;
   padding: 5px 45px;  
